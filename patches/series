@@ -4,3 +4,4 @@ term_and_master_size.patch
 increase_masters.patch
 moveresize.patch
 save_floats.patch
+tagall.patch

@@ -1,0 +1,60 @@
+URL: https://dwm.suckless.org/patches/tagall
+Shortcut to move all (floating) windows from one tag to another.
+
+Index: dwm_patches/dwm/config.def.h
+===================================================================
+--- dwm_patches.orig/dwm/config.def.h
++++ dwm_patches/dwm/config.def.h
+@@ -59,6 +59,7 @@ static char dmenumon[2] = "0"; /* compon
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+ static const char *termcmd[]  = { "alacritty", NULL };
+ 
++#include "tagall.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -102,6 +103,15 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY|ShiftMask,             XK_F1,     tagall,         {.v = "F1" } },
++	{ MODKEY|ShiftMask,             XK_F2,     tagall,         {.v = "F2" } },
++	{ MODKEY|ShiftMask,             XK_F3,     tagall,         {.v = "F3" } },
++	{ MODKEY|ShiftMask,             XK_F4,     tagall,         {.v = "F4" } },
++	{ MODKEY|ShiftMask,             XK_F5,     tagall,         {.v = "F5" } },
++	{ MODKEY|ShiftMask,             XK_F6,     tagall,         {.v = "F6" } },
++	{ MODKEY|ShiftMask,             XK_F7,     tagall,         {.v = "F7" } },
++	{ MODKEY|ShiftMask,             XK_F8,     tagall,         {.v = "F8" } },
++	{ MODKEY|ShiftMask,             XK_F9,     tagall,         {.v = "F9" } },
+ };
+ 
+ /* button definitions */
+Index: dwm_patches/dwm/tagall.c
+===================================================================
+--- /dev/null
++++ dwm_patches/dwm/tagall.c
+@@ -0,0 +1,24 @@
++void
++tagall(const Arg *arg) {
++    if (!selmon->clients)
++        return;
++    /* if parameter starts with F, just move floating windows */
++    int floating_only = (char *)arg->v && ((char *)arg->v)[0] == 'F' ? 1 : 0;
++    int tag = (char *)arg->v ? atoi(((char *)arg->v) + floating_only) : 0;
++    int j;
++    Client* c;
++    if(tag >= 0 && tag < LENGTH(tags))
++        for(c = selmon->clients; c; c = c->next)
++        {
++            if(!floating_only || c->isfloating)
++                for(j = 0; j < LENGTH(tags); j++)
++                {
++                    if(c->tags & 1 << j && selmon->tagset[selmon->seltags] & 1 << j)
++                    {
++                        c->tags = c->tags ^ (1 << j & TAGMASK);
++                        c->tags = c->tags | 1 << (tag-1);
++                    }
++                }
++        }
++    arrange(selmon);
++}
