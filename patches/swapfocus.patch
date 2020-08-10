@@ -1,3 +1,7 @@
+URL: https://dwm.suckless.org/patches/swapfocus
+This patch makes it possible to switch focus with one single shortcut
+(Alt-Tab).
+
 Index: dwm_patches/dwm/dwm.c
 ===================================================================
 --- dwm_patches.orig/dwm/dwm.c
