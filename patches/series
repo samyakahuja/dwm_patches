@@ -5,3 +5,4 @@ increase_masters.patch
 moveresize.patch
 save_floats.patch
 tagall.patch
+swapfocus.patch
