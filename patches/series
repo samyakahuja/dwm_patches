@@ -6,3 +6,4 @@ moveresize.patch
 save_floats.patch
 tagall.patch
 swapfocus.patch
+centeredmaster.patch
