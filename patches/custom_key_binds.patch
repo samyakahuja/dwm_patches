@@ -1,0 +1,63 @@
+Index: dwm_patches/dwm/config.def.h
+===================================================================
+--- dwm_patches.orig/dwm/config.def.h
++++ dwm_patches/dwm/config.def.h
+@@ -45,6 +45,11 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
++#define XF86XK_MonBrightnessUp      0x1008ff02
++#define XF86XK_MonBrightnessDown    0x1008ff03
++#define XF86XK_AudioMute            0x1008ff12
++#define XF86XK_AudioRaiseVolume     0x1008ff13
++#define XF86XK_AudioLowerVolume     0x1008ff11
+ #define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+@@ -62,10 +67,12 @@ static const char *termcmd[]  = { "alacr
+ 
+ #include "tagall.c"
+ #include "centredmaster.c"
++//#include "<X11/XF86keysym.h>"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
++	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
++	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
++	{ MODKEY,                       XK_w,      spawn,          SHCMD("$BROWSER") },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+@@ -74,7 +81,7 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_o,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+-	{ MODKEY,                       XK_Return, zoom,           {0} },
++	{ MODKEY|ShiftMask,             XK_space,  zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+ 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
+@@ -82,8 +89,8 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} }, // centeredmaster
+ 	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[3]} }, // centeredfloatingmaster
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[4]} }, // floating
+-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
++	{ MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
++	{ MODKEY,                       XK_p,      setlayout,      {0} },
+ 	{ MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
+ 	{ MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
+ 	{ MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
+@@ -117,6 +124,11 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_F7,     tagall,         {.v = "F7" } },
+ 	{ MODKEY|ShiftMask,             XK_F8,     tagall,         {.v = "F8" } },
+ 	{ MODKEY|ShiftMask,             XK_F9,     tagall,         {.v = "F9" } },
++	{ 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("xbacklight -inc 15") },
++	{ 0, XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -dec 15") },
++	{ 0, XF86XK_AudioMute,         spawn, SHCMD("amixer -q sset Master toggle") },
++	{ 0, XF86XK_AudioRaiseVolume,  spawn, SHCMD("amixer -q sset Master 5%+") },
++	{ 0, XF86XK_AudioLowerVolume,  spawn, SHCMD("amixer -q sset Master 5%-") },
+ };
+ 
+ /* button definitions */
