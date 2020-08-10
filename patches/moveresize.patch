@@ -3,7 +3,7 @@ The moveresize patch allows floating windows to be resized and moved using
 keyboard shortcuts.
 
 Index: dwm_patches/dwm/config.def.h
-===============================================================
+===================================================================
 --- dwm_patches.orig/dwm/config.def.h
 +++ dwm_patches/dwm/config.def.h
 @@ -78,6 +78,14 @@ static Key keys[] = {
@@ -21,12 +21,11 @@ Index: dwm_patches/dwm/config.def.h
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
  	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
  	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-
 Index: dwm_patches/dwm/dwm.c
-===============================================================
+===================================================================
 --- dwm_patches.orig/dwm/dwm.c
 +++ dwm_patches/dwm/dwm.c
-@@ -182,6 +182,7 @@ static void mappingnotify(XEvent *e);
+@@ -183,6 +183,7 @@ static void mappingnotify(XEvent *e);
  static void maprequest(XEvent *e);
  static void monocle(Monitor *m);
  static void motionnotify(XEvent *e);
@@ -34,7 +33,7 @@ Index: dwm_patches/dwm/dwm.c
  static void movemouse(const Arg *arg);
  static Client *nexttiled(Client *c);
  static void pop(Client *);
-@@ -1192,6 +1193,71 @@ movemouse(const Arg *arg)
+@@ -1193,6 +1194,71 @@ movemouse(const Arg *arg)
  	}
  }
  
