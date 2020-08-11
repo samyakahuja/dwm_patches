@@ -1,0 +1,42 @@
+Index: dwm_patches/dwm/config.def.h
+===================================================================
+--- dwm_patches.orig/dwm/config.def.h
++++ dwm_patches/dwm/config.def.h
+@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 3;
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+-static const char *fonts[]          = { "Hack-Regular:size=14" };
++static const char *fonts[]          = { "Hack-Regular:size=14", "JoyPixels:pixelsize=14:antialias=true:autohint=true"};
+ static const char dmenufont[]       = "Hack-Regular:size=14";
+ static const char col_gray1[]       = "#222222";
+ static const char col_gray2[]       = "#444444";
+@@ -73,6 +73,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+ 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_w,      spawn,          SHCMD("$BROWSER") },
++	{ MODKEY,                       XK_e,      spawn,          SHCMD("dmenuunicode") },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+Index: dwm_patches/dwm/drw.c
+===================================================================
+--- dwm_patches.orig/dwm/drw.c
++++ dwm_patches/dwm/drw.c
+@@ -140,11 +140,11 @@ xfont_create(Drw *drw, const char *fontn
+ 	 * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=916349
+ 	 * and lots more all over the internet.
+ 	 */
+-	FcBool iscol;
+-	if(FcPatternGetBool(xfont->pattern, FC_COLOR, 0, &iscol) == FcResultMatch && iscol) {
+-		XftFontClose(drw->dpy, xfont);
+-		return NULL;
+-	}
++	//FcBool iscol;
++	//if(FcPatternGetBool(xfont->pattern, FC_COLOR, 0, &iscol) == FcResultMatch && iscol) {
++	//	XftFontClose(drw->dpy, xfont);
++	//	return NULL;
++	//}
+ 
+ 	font = ecalloc(1, sizeof(Fnt));
+ 	font->xfont = xfont;

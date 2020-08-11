@@ -40,6 +40,7 @@ This is my build of dwm which can be installed using `quilt`.
 | Remove border when only one window         | [patches/noborder.patch](patches/noborder.patch)                         | [suckless/noborder](https://dwm.suckless.org/patches/noborder)           |
 | Change key bindings                        | [patches/custom_key_binds.patch](patches/custom_key_binds.patch)         | No link                                                                  |
 | Change font and border size                | [patches/font_and_border.patch](patches/font_and_border.patch)           | No link                                                                  |
+| Support emojis                             | [patches/emoji_support.patch](patches/emoji_support.patch)               | No link                                                                  |
 
 ## Interesting Unapplied patches
 
