@@ -1,0 +1,39 @@
+Index: dwm_patches/dwm/config.def.h
+===================================================================
+--- dwm_patches.orig/dwm/config.def.h
++++ dwm_patches/dwm/config.def.h
+@@ -50,6 +50,7 @@ static const Layout layouts[] = {
+ #define XF86XK_AudioMute            0x1008ff12
+ #define XF86XK_AudioRaiseVolume     0x1008ff13
+ #define XF86XK_AudioLowerVolume     0x1008ff11
++#define XF86XK_PowerOff             0x1008ff2a
+ #define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+@@ -84,7 +85,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY|ShiftMask,             XK_space,  zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
++	{ MODKEY,                       XK_q,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} }, // monocle
+ 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} }, // centeredmaster
+@@ -115,7 +116,8 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY|ShiftMask,             XK_q,      spawn,          SHCMD("sysact") },
++	{ MODKEY,               XK_BackSpace,      spawn,          SHCMD("sysact") },
+ 	{ MODKEY|ShiftMask,             XK_F1,     tagall,         {.v = "F1" } },
+ 	{ MODKEY|ShiftMask,             XK_F2,     tagall,         {.v = "F2" } },
+ 	{ MODKEY|ShiftMask,             XK_F3,     tagall,         {.v = "F3" } },
+@@ -130,6 +132,7 @@ static Key keys[] = {
+ 	{ 0, XF86XK_AudioMute,         spawn, SHCMD("amixer -q sset Master toggle") },
+ 	{ 0, XF86XK_AudioRaiseVolume,  spawn, SHCMD("amixer -q sset Master 5%+") },
+ 	{ 0, XF86XK_AudioLowerVolume,  spawn, SHCMD("amixer -q sset Master 5%-") },
++	{ 0, XF86XK_PowerOff,          spawn, SHCMD("sysact") },
+ };
+ 
+ /* button definitions */
