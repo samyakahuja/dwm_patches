@@ -2,15 +2,15 @@ Index: dwm_patches/dwm/config.def.h
 ===================================================================
 --- dwm_patches.orig/dwm/config.def.h
 +++ dwm_patches/dwm/config.def.h
-@@ -50,6 +50,7 @@ static const Layout layouts[] = {
- #define XF86XK_AudioMute            0x1008ff12
+@@ -51,6 +51,7 @@ static const Layout layouts[] = {
  #define XF86XK_AudioRaiseVolume     0x1008ff13
  #define XF86XK_AudioLowerVolume     0x1008ff11
+ #define XF86XK_AudioMicMute         0x1008FFB2
 +#define XF86XK_PowerOff             0x1008ff2a
  #define MODKEY Mod4Mask
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-@@ -84,7 +85,7 @@ static Key keys[] = {
+@@ -85,7 +86,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
  	{ MODKEY|ShiftMask,             XK_space,  zoom,           {0} },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
@@ -19,7 +19,7 @@ Index: dwm_patches/dwm/config.def.h
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} }, // monocle
  	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} }, // centeredmaster
-@@ -115,7 +116,8 @@ static Key keys[] = {
+@@ -116,7 +117,8 @@ static Key keys[] = {
  	TAGKEYS(                        XK_7,                      6)
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
@@ -29,10 +29,10 @@ Index: dwm_patches/dwm/config.def.h
  	{ MODKEY|ShiftMask,             XK_F1,     tagall,         {.v = "F1" } },
  	{ MODKEY|ShiftMask,             XK_F2,     tagall,         {.v = "F2" } },
  	{ MODKEY|ShiftMask,             XK_F3,     tagall,         {.v = "F3" } },
-@@ -130,6 +132,7 @@ static Key keys[] = {
- 	{ 0, XF86XK_AudioMute,         spawn, SHCMD("amixer -q sset Master toggle") },
+@@ -132,6 +134,7 @@ static Key keys[] = {
  	{ 0, XF86XK_AudioRaiseVolume,  spawn, SHCMD("amixer -q sset Master 5%+") },
  	{ 0, XF86XK_AudioLowerVolume,  spawn, SHCMD("amixer -q sset Master 5%-") },
+ 	{ 0, XF86XK_AudioMicMute,      spawn, SHCMD("amixer -q sset Capture toggle") },
 +	{ 0, XF86XK_PowerOff,          spawn, SHCMD("sysact") },
  };
  
